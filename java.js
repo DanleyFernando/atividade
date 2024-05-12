@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var produtos = [
-        new Produto('Produto 1', 19.99, 'Descrição do Produto 1', 'imagens/pera.png'),
-        new Produto('Produto 2', 29.99, 'Descrição do Produto 2', 'imagem2.jpg'),
-        new Produto('Produto 3', 39.99, 'Descrição do Produto 3', 'imagem3.jpg'),
-        new Produto('Produto 4', 49.99, 'Descrição do Produto 4', 'imagem4.jpg')
+        new Produto('Xaiomi', 19.99, 'Características: 15 polegadas, Android 5.3', 'product/pera.png'),
+        
     ];
     
     gerarListaDeCartoes(produtos);
@@ -39,26 +37,20 @@ function criarCartaoHtml(produto) {
     cartao.style.margin = '10px';
     cartao.style.width = '200px';
     cartao.style.float = 'left';
-
+    cartao.style.position = 'relative'; 
     var imagem = document.createElement('img');
-    imagem.src = produto.urlImagem;
-    imagem.style.maxWidth = '100%';
-    imagem.style.height = 'auto';
-    cartao.appendChild(imagem);
+    imagem.src = produto.urlImagem; 
+    imagem.style.width = '100%'; 
+    cartao.appendChild(imagem); 
 
     var nome = document.createElement('h2');
     nome.textContent = produto.nome;
     cartao.appendChild(nome);
 
     var preco = document.createElement('p');
-    var precoComDesconto = produto.preco * 0.98; // Aplica o desconto de 2%
+    var precoComDesconto = produto.preco * 0.98; 
     preco.textContent = 'Preço: R$ ' + precoComDesconto.toFixed(2);
     cartao.appendChild(preco);
-
-    var desconto = document.createElement('p');
-    var percentualDesconto = ((produto.preco - precoComDesconto) / produto.preco) * 100;
-    desconto.textContent = 'Desconto: ' + percentualDesconto.toFixed(2) + '%';
-    cartao.appendChild(desconto);
 
     var descricao = document.createElement('p');
     descricao.textContent = produto.descricao;
@@ -70,6 +62,17 @@ function criarCartaoHtml(produto) {
     botaoCompra.style.color = 'white'; 
     botaoCompra.style.borderRadius = '5px'; 
     cartao.appendChild(botaoCompra);
+
+    var desconto = document.createElement('p');
+    var percentualDesconto = ((produto.preco - precoComDesconto) / produto.preco) * 100;
+    desconto.textContent = 'Desconto: ' + percentualDesconto.toFixed(2) + '%';
+    desconto.style.color = 'green'; 
+    desconto.style.border = '1px solid green'; 
+    desconto.style.padding = '5px';
+    desconto.style.position = 'absolute'; 
+    desconto.style.top = '100%'; 
+    desconto.style.left = '0'; 
+    cartao.appendChild(desconto);
 
     return cartao;
 }
